@@ -35,7 +35,6 @@ export default class Tree {
   }
 
   deleteItem(root, value) {
-    console.log(root.data, value)
     if (root.data === value) {
       // 0 children
       if (!root.left && !root.right) return null;
@@ -48,7 +47,7 @@ export default class Tree {
       // search for min of right subtree
       let minNode = this.findMin(root.right);
       root.data = minNode.data;
-      root.right = this.deleteItem(minNode, minNode.data);
+      root.right = this.deleteItem(root.right, minNode.data);
       return root;
     }
 

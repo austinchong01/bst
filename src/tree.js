@@ -20,7 +20,7 @@ export default class Tree {
     return root;
   }
 
-  insert(root, value) {
+  insert(value, root = this.root) {
     if (!root) {
       const node = new Node(value);
       if (!this.root) this.root = node;
@@ -29,12 +29,12 @@ export default class Tree {
 
     if (root.data === value) return root;
 
-    if (value < root.data) root.left = this.insert(root.left, value);
-    else root.right = this.insert(root.right, value);
+    if (value < root.data) root.left = this.insert(value, root.left);
+    else root.right = this.insert(value, root.right);
     return root;
   }
 
-  deleteItem(root, value) {
+  deleteItem(value, root = this.root) {
     if (root.data === value) {
       // 0 children
       if (!root.left && !root.right) return null;
@@ -47,18 +47,25 @@ export default class Tree {
       // search for min of right subtree
       let minNode = this.findMin(root.right);
       root.data = minNode.data;
-      root.right = this.deleteItem(root.right, minNode.data);
+      root.right = this.deleteItem(minNode.data, root.right);
       return root;
     }
 
-    if (value < root.data) root.left = this.deleteItem(root.left, value);
-    else root.right = this.deleteItem(root.right, value);
+    if (value < root.data) root.left = this.deleteItem(value, root.left);
+    else root.right = this.deleteItem(value, root.right);
     return root;
   }
 
-  findMin(root){
-    if(!root) return null;
-    while(root.left) root = root.left;
-    return root
+  findMin(root) {
+    if (!root) return null;
+    while (root.left) root = root.left;
+    return root;
+  }
+
+  find(value, root = this.root) {
+    if (root.data === value) return root;
+
+    if (value < root.data) return this.find(value, root.left);
+    else return this.find(value, root.right);
   }
 }

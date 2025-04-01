@@ -27,10 +27,39 @@ export default class Tree {
       return node;
     }
 
+    if (root.data === value) return root;
+
     if (value < root.data) root.left = this.insert(root.left, value);
     else root.right = this.insert(root.right, value);
     return root;
   }
 
-  deleteItem(value) {}
+  deleteItem(root, value) {
+    console.log(root.data, value)
+    if (root.data === value) {
+      // 0 children
+      if (!root.left && !root.right) return null;
+
+      // 1 child
+      if (!root.left) return root.right;
+      else if (!root.right) return root.left;
+
+      // 2 children
+      // search for min of right subtree
+      let minNode = this.findMin(root.right);
+      root.data = minNode.data;
+      root.right = this.deleteItem(minNode, minNode.data);
+      return root;
+    }
+
+    if (value < root.data) root.left = this.deleteItem(root.left, value);
+    else root.right = this.deleteItem(root.right, value);
+    return root;
+  }
+
+  findMin(root){
+    if(!root) return null;
+    while(root.left) root = root.left;
+    return root
+  }
 }

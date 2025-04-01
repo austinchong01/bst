@@ -10,6 +10,7 @@ export default class Tree {
 
   buildTree(array, start = 0, end = array.length - 1) {
     if (start > end) return null;
+
     const mid = Math.floor((start + end) / 2);
     const root = new Node(array[mid]);
 
@@ -18,4 +19,18 @@ export default class Tree {
 
     return root;
   }
+
+  insert(root, value) {
+    if (!root) {
+      const node = new Node(value);
+      if (!this.root) this.root = node;
+      return node;
+    }
+
+    if (value < root.data) root.left = this.insert(root.left, value);
+    else root.right = this.insert(root.right, value);
+    return root;
+  }
+
+  deleteItem(value) {}
 }

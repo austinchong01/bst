@@ -68,4 +68,6 @@ export default class Tree {
     if (value < root.data) return this.find(value, root.left);
     else return this.find(value, root.right);
   }
+
+  levelOrder(callback) {}
 }

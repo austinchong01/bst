@@ -5,7 +5,6 @@ export default class Tree {
     this.array = [...new Set(array)]; // remove duplicates
     this.array = this.array.sort((a, b) => a - b); // sort array
     this.root = this.buildTree(this.array);
-    this.height = 0;
   }
 
   buildTree(array, start = 0, end = array.length - 1) {
@@ -69,5 +68,52 @@ export default class Tree {
     else return this.find(value, root.right);
   }
 
-  levelOrder(callback) {}
+  levelOrder(callback) {
+    // use queue
+    const result = [];
+    const queue = [this.root];
+    while (queue.length != 0) {
+      const visited = queue.shift();
+      result.push(visited.data);
+      if (visited.left) queue.push(visited.left);
+      if (visited.right) queue.push(visited.right);
+    }
+    return result;
+  }
+
+  height(node) {
+    let height = 0;
+    while () {
+      height += 1;
+    }
+    return height;
+  }
+
+  depth(node) {
+    let root = this.root;
+    let depth = 0;
+    while (root) {
+      if (root.data === node.data) {
+        return depth;
+      }
+      depth += 1;
+      if (node.data < root.data) root = root.left;
+      else root = root.right;
+    }
+    return null;
+  }
+
+  isBalanced(){
+    const left = this.root.left;
+    const right = this.root.right;
+    // console.log(right)
+    console.log(this.height(left))
+    console.log(this.height(right))
+    // const diff = Math.abs(this.height(left) - this.height(right));
+
+    // console.log(diff)
+
+    // if (diff <= 1) return true;
+    // else return false;
+  }
 }

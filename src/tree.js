@@ -96,7 +96,7 @@ export default class Tree {
 
     if (visited.left) queue.push(visited.left);
     if (visited.right) queue.push(visited.right);
-    return this.levelOrderRecur(callback, queue)
+    return this.levelOrderRecur(callback, queue);
   }
 
   // DFS functions
@@ -136,8 +136,8 @@ export default class Tree {
   height(node, h = 0) {
     if (!node) return h - 1;
 
-    const leftHeight = this.height(node.left, h + 1)
-    const rightHeight = this.height(node.right, h + 1)
+    const leftHeight = this.height(node.left, h + 1);
+    const rightHeight = this.height(node.right, h + 1);
 
     return Math.max(leftHeight, rightHeight);
   }
@@ -154,6 +154,16 @@ export default class Tree {
       else root = root.right;
     }
     return null;
+  }
+
+  depthRecur(node, root = this.root, d = 0) {
+    if (!root) return 0;
+    if (node === root) return d;
+
+    if (node.data < root.data)
+      return this.depthRecur(node, root.left, d + 1);
+    else
+      return this.depthRecur(node, root.right, d + 1);
   }
 
   isBalanced() {

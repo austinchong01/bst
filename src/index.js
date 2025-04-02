@@ -16,11 +16,10 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree(array);
 
-const node = tree.find(67)
-console.log(tree.depthRecur(node))
-// tree.insert(6347)
-// tree.insert(6348)
-// tree.isBalanced()
+// const node = tree.find(67)
+tree.insert(24)
+tree.insert(23.5)
+console.log(tree.isBalanced())
 // tree.deleteItem(8);
 
 function print(node){

@@ -169,14 +169,8 @@ export default class Tree {
   isBalanced() {
     const left = this.root.left;
     const right = this.root.right;
-    // console.log(right)
-    console.log(this.height(left));
-    console.log(this.height(right));
-    // const diff = Math.abs(this.height(left) - this.height(right));
-
-    // console.log(diff)
-
-    // if (diff <= 1) return true;
-    // else return false;
+    const diff = Math.abs(this.height(left) - this.height(right));
+    if (diff <= 1) return true;
+    else return false;
   }
 }

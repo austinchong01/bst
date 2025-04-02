@@ -160,10 +160,8 @@ export default class Tree {
     if (!root) return 0;
     if (node === root) return d;
 
-    if (node.data < root.data)
-      return this.depthRecur(node, root.left, d + 1);
-    else
-      return this.depthRecur(node, root.right, d + 1);
+    if (node.data < root.data) return this.depthRecur(node, root.left, d + 1);
+    else return this.depthRecur(node, root.right, d + 1);
   }
 
   isBalanced() {
@@ -172,5 +170,20 @@ export default class Tree {
     const diff = Math.abs(this.height(left) - this.height(right));
     if (diff <= 1) return true;
     else return false;
+  }
+
+  rebalance() {
+    let array = [];
+    if (!this.root) return;
+
+    const queue = [this.root];
+    while (queue.length != 0) {
+      const visited = queue.shift();
+      array.push(visited.data);
+      if (visited.left) queue.push(visited.left);
+      if (visited.right) queue.push(visited.right);
+    }
+    array = array.sort((a, b) => a - b); // sort array
+    this.root = this.buildTree(array);
   }
 }

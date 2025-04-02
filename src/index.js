@@ -16,15 +16,14 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree(array);
 
-// const node = tree.find(67)
-tree.insert(24)
-tree.insert(23.5)
-console.log(tree.isBalanced())
-// tree.deleteItem(8);
+tree.insert(24);
+tree.insert(25);
+tree.insert(26);
+tree.insert(24);
+tree.rebalance();
 
-function print(node){
-  console.log(node.data)
+function print(node) {
+  console.log(node.data);
 }
-
 
 prettyPrint(tree.root);

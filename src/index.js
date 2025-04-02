@@ -16,7 +16,8 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 const tree = new Tree(array);
 
-tree.postOrder(print)
+const node = tree.find(8)
+console.log(tree.height(node))
 // tree.insert(6347)
 // tree.insert(6348)
 // tree.isBalanced()

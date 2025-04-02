@@ -133,27 +133,28 @@ export default class Tree {
     callback(root);
   }
 
-  // height(node) {
-  //   let height = 0;
-  //   while () {
-  //     height += 1;
-  //   }
-  //   return height;
-  // }
+  height(node, h = 0) {
+    if (!node) return h - 1;
 
-  // depth(node) {
-  //   let root = this.root;
-  //   let depth = 0;
-  //   while (root) {
-  //     if (root.data === node.data) {
-  //       return depth;
-  //     }
-  //     depth += 1;
-  //     if (node.data < root.data) root = root.left;
-  //     else root = root.right;
-  //   }
-  //   return null;
-  // }
+    const leftHeight = this.height(node.left, h + 1)
+    const rightHeight = this.height(node.right, h + 1)
+
+    return Math.max(leftHeight, rightHeight);
+  }
+
+  depth(node) {
+    let root = this.root;
+    let depth = 0;
+    while (root) {
+      if (root.data === node.data) {
+        return depth;
+      }
+      depth += 1;
+      if (node.data < root.data) root = root.left;
+      else root = root.right;
+    }
+    return null;
+  }
 
   isBalanced() {
     const left = this.root.left;

@@ -13,17 +13,73 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-const tree = new Tree(array);
-
-tree.insert(24);
-tree.insert(25);
-tree.insert(26);
-tree.insert(24);
-tree.rebalance();
-
-function print(node) {
-  console.log(node.data);
+function createRandomArray(n, min, max) {
+  const randomArray = [];
+  for (let i = 0; i < n; i++) {
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    randomArray.push(randomNumber);
+  }
+  return randomArray;
 }
 
+function print(node) {
+  return console.log(node.data);
+}
+
+const array = createRandomArray(10, 0, 100);
+console.log("Array: [" + array + "]");
+console.log("");
+
+const tree = new Tree(array);
 prettyPrint(tree.root);
+console.log("");
+
+console.log("Balanced: " + tree.isBalanced());
+console.log("");
+
+console.log("levelOrder:");
+tree.levelOrderRecur(print);
+
+console.log("");
+console.log("preOrder:");
+tree.preOrder(print);
+
+console.log("");
+console.log("inOrder:");
+tree.inOrder(print);
+
+console.log("");
+console.log("postOrder:");
+tree.postOrder(print);
+
+console.log("");
+tree.insert(11);
+tree.insert(10);
+tree.insert(9);
+tree.insert(8);
+tree.insert(7);
+tree.insert(6);
+prettyPrint(tree.root);
+console.log("Balanced: " + tree.isBalanced());
+console.log("");
+
+tree.rebalance();
+console.log("Rebalanced Tree: ")
+prettyPrint(tree.root);
+console.log("Balanced: " + tree.isBalanced());
+console.log("");
+
+console.log("levelOrder:");
+tree.levelOrderRecur(print);
+
+console.log("");
+console.log("preOrder:");
+tree.preOrder(print);
+
+console.log("");
+console.log("inOrder:");
+tree.inOrder(print);
+
+console.log("");
+console.log("postOrder:");
+tree.postOrder(print);

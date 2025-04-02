@@ -68,47 +68,99 @@ export default class Tree {
     else return this.find(value, root.right);
   }
 
+  // BFS function
   levelOrder(callback) {
-    // use queue
-    const result = [];
+    if (typeof callback !== "function")
+      throw new Error("Callback function must be provided.");
+
+    if (!this.root) return;
+
     const queue = [this.root];
     while (queue.length != 0) {
       const visited = queue.shift();
-      result.push(visited.data);
+      callback(visited);
       if (visited.left) queue.push(visited.left);
       if (visited.right) queue.push(visited.right);
     }
-    return result;
   }
 
-  height(node) {
-    let height = 0;
-    while () {
-      height += 1;
-    }
-    return height;
+  levelOrderRecur(callback, queue = [this.root]) {
+    if (typeof callback !== "function")
+      throw new Error("Callback function must be provided.");
+    if (!this.root) return;
+
+    if (queue.length === 0) return;
+
+    const visited = queue.shift();
+    callback(visited);
+
+    if (visited.left) queue.push(visited.left);
+    if (visited.right) queue.push(visited.right);
+    return this.levelOrderRecur(callback, queue)
   }
 
-  depth(node) {
-    let root = this.root;
-    let depth = 0;
-    while (root) {
-      if (root.data === node.data) {
-        return depth;
-      }
-      depth += 1;
-      if (node.data < root.data) root = root.left;
-      else root = root.right;
-    }
-    return null;
+  // DFS functions
+  preOrder(callback, root = this.root) {
+    if (typeof callback !== "function")
+      throw new Error("Callback function must be provided.");
+
+    if (!root) return;
+
+    callback(root);
+    this.preOrder(callback, root.left);
+    this.preOrder(callback, root.right);
   }
 
-  isBalanced(){
+  inOrder(callback, root = this.root) {
+    if (typeof callback !== "function")
+      throw new Error("Callback function must be provided.");
+
+    if (!root) return;
+
+    this.inOrder(callback, root.left);
+    callback(root);
+    this.inOrder(callback, root.right);
+  }
+
+  postOrder(callback, root = this.root) {
+    if (typeof callback !== "function")
+      throw new Error("Callback function must be provided.");
+
+    if (!root) return;
+
+    this.postOrder(callback, root.left);
+    this.postOrder(callback, root.right);
+    callback(root);
+  }
+
+  // height(node) {
+  //   let height = 0;
+  //   while () {
+  //     height += 1;
+  //   }
+  //   return height;
+  // }
+
+  // depth(node) {
+  //   let root = this.root;
+  //   let depth = 0;
+  //   while (root) {
+  //     if (root.data === node.data) {
+  //       return depth;
+  //     }
+  //     depth += 1;
+  //     if (node.data < root.data) root = root.left;
+  //     else root = root.right;
+  //   }
+  //   return null;
+  // }
+
+  isBalanced() {
     const left = this.root.left;
     const right = this.root.right;
     // console.log(right)
-    console.log(this.height(left))
-    console.log(this.height(right))
+    console.log(this.height(left));
+    console.log(this.height(right));
     // const diff = Math.abs(this.height(left) - this.height(right));
 
     // console.log(diff)
